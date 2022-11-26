@@ -9,10 +9,16 @@ import javax.swing.JOptionPane;
 
 public class UI_VentanaPrincipal extends javax.swing.JFrame {
     int xmouse, ymouse;
+    
+   
+    Usser Uss = new Usser();
+    
+   
+    
     public UI_VentanaPrincipal() {
         initComponents();
         this.setLocationRelativeTo(null);
-        
+        System.out.println(Uss);
     
     }
     
@@ -302,21 +308,38 @@ private class_listaPersonas lista;
 
     private void BtnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAgregarActionPerformed
         String nombre, apellidos, cedula;
+        
+        
+        
+        
         JFileChooser fc = new JFileChooser();
         fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         try {
-            FileWriter fw = new FileWriter("C:\\Users\\Laura\\Documents\\personas.txt");
+            
+            
+            File file = new File(("user.home") + "\\Desktop");
+           
+            //System.out.println(file.getCanonicalPath());
+            if(!file.exists()){
+                file.createNewFile();
+            }
+            
+            
+            FileWriter fw = new FileWriter(file);
             BufferedWriter bw = new BufferedWriter(fw);
             bw.write(txt_nombre.getText()  + txt_apellido.getText() + "Con cédula= " + txt_cedula.getText());
             bw.close(); 
             String texto = "Tus datos se han guardado" ;
             JOptionPane.showMessageDialog(this, texto, "Mensaje", JOptionPane.INFORMATION_MESSAGE,null);
-            } catch (Exception e) {
+        } 
+        catch (Exception e) {
             e.printStackTrace();
-            }
+        }
+        
         verDatos();
     }//GEN-LAST:event_BtnAgregarActionPerformed
     private void verDatos(){
+        
         Persona aux;
         for (int i = 0; i < lista.size(); i++){
             Object Mat[][] = new Object[i][3];
@@ -324,8 +347,9 @@ private class_listaPersonas lista;
             Mat[i][0] = txt_nombre.getText();
             Mat[i][1] = txt_apellido.getText();
             Mat[i][2] = txt_cedula.getText();          
-        };
         }
+        
+    }
     private void tablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_tablaMouseClicked
