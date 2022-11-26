@@ -235,6 +235,15 @@ public class UI_VentanaPrincipal extends javax.swing.JFrame {
         BtnAgregar.setForeground(new java.awt.Color(255, 255, 255));
         BtnAgregar.setText("Agregar");
         BtnAgregar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        BtnAgregar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        BtnAgregar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                BtnAgregarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                BtnAgregarMouseExited(evt);
+            }
+        });
         BtnAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnAgregarActionPerformed(evt);
@@ -246,6 +255,15 @@ public class UI_VentanaPrincipal extends javax.swing.JFrame {
         BtnLimpiar.setForeground(new java.awt.Color(255, 255, 255));
         BtnLimpiar.setText("Limpiar");
         BtnLimpiar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        BtnLimpiar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        BtnLimpiar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                BtnLimpiarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                BtnLimpiarMouseExited(evt);
+            }
+        });
         BtnLimpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnLimpiarActionPerformed(evt);
@@ -257,6 +275,15 @@ public class UI_VentanaPrincipal extends javax.swing.JFrame {
         BtnModificar.setForeground(new java.awt.Color(255, 255, 255));
         BtnModificar.setText("Modificar");
         BtnModificar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        BtnModificar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        BtnModificar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                BtnModificarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                BtnModificarMouseExited(evt);
+            }
+        });
         BtnModificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnModificarActionPerformed(evt);
@@ -268,6 +295,15 @@ public class UI_VentanaPrincipal extends javax.swing.JFrame {
         BtnEliminar.setForeground(new java.awt.Color(255, 255, 255));
         BtnEliminar.setText("Eliminar");
         BtnEliminar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        BtnEliminar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        BtnEliminar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                BtnEliminarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                BtnEliminarMouseExited(evt);
+            }
+        });
         BtnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnEliminarActionPerformed(evt);
@@ -407,6 +443,38 @@ private class_listaPersonas lista;
         
         
     }//GEN-LAST:event_BtnModificarActionPerformed
+
+    private void BtnAgregarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnAgregarMouseEntered
+        BtnAgregar.setBackground(new Color(111,45,54));
+    }//GEN-LAST:event_BtnAgregarMouseEntered
+
+    private void BtnAgregarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnAgregarMouseExited
+        BtnAgregar.setBackground(new Color(142, 57, 70));
+    }//GEN-LAST:event_BtnAgregarMouseExited
+
+    private void BtnLimpiarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnLimpiarMouseEntered
+        BtnLimpiar.setBackground(new Color(111,45,54));
+    }//GEN-LAST:event_BtnLimpiarMouseEntered
+
+    private void BtnLimpiarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnLimpiarMouseExited
+        BtnLimpiar.setBackground(new Color(142, 57, 70));
+    }//GEN-LAST:event_BtnLimpiarMouseExited
+
+    private void BtnModificarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnModificarMouseEntered
+        BtnModificar.setBackground(new Color(111,45,54));
+    }//GEN-LAST:event_BtnModificarMouseEntered
+
+    private void BtnModificarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnModificarMouseExited
+        BtnModificar.setBackground(new Color(142, 57, 70));
+    }//GEN-LAST:event_BtnModificarMouseExited
+
+    private void BtnEliminarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnEliminarMouseEntered
+        BtnEliminar.setBackground(new Color(111,45,54));
+    }//GEN-LAST:event_BtnEliminarMouseEntered
+
+    private void BtnEliminarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnEliminarMouseExited
+        BtnEliminar.setBackground(new Color(142, 57, 70));
+    }//GEN-LAST:event_BtnEliminarMouseExited
 
     public static void main(String args[]) {
         //CrearArchivo("personas");
