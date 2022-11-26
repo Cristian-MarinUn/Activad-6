@@ -1,5 +1,7 @@
 package formularioPersonas;
 
+import static formularioPersonas.manejoArchivo.CrearArchivo;
+import static formularioPersonas.manejoArchivo.EscribirArchivo;
 import java.awt.Color;
 import java.io.*;
 import java.util.logging.Level;
@@ -8,17 +10,28 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
 public class UI_VentanaPrincipal extends javax.swing.JFrame {
+
+    private static void EscribirArchivo(String personas) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+  
+
     int xmouse, ymouse;
+
     
-   
-    Usser Uss = new Usser();
     
-   
     
+    
+    
+    
+    
+    
+      
     public UI_VentanaPrincipal() {
         initComponents();
         this.setLocationRelativeTo(null);
-        System.out.println(Uss);
+        //System.out.println(Uss);
     
     }
     
@@ -310,24 +323,13 @@ private class_listaPersonas lista;
         String nombre, apellidos, cedula;
         
         
-        
-        
         JFileChooser fc = new JFileChooser();
         fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         try {
-            
-            
-            File file = new File(("user.home") + "\\Desktop");
            
-            //System.out.println(file.getCanonicalPath());
-            if(!file.exists()){
-                file.createNewFile();
-            }
-            
-            
-            FileWriter fw = new FileWriter(file);
+            FileWriter fw = new FileWriter("personas.txt");
             BufferedWriter bw = new BufferedWriter(fw);
-            bw.write(txt_nombre.getText()  + txt_apellido.getText() + "Con cédula= " + txt_cedula.getText());
+            bw.write(txt_nombre.getText()  +" " +txt_apellido.getText() + " con cédula= " + txt_cedula.getText());
             bw.close(); 
             String texto = "Tus datos se han guardado" ;
             JOptionPane.showMessageDialog(this, texto, "Mensaje", JOptionPane.INFORMATION_MESSAGE,null);
@@ -361,11 +363,26 @@ private class_listaPersonas lista;
     }//GEN-LAST:event_BtnLimpiarActionPerformed
 
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
+        //CrearArchivo("personas");
+        EscribirArchivo("personas");
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+       // EscribirArchivo("personas");
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
