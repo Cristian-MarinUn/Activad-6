@@ -11,9 +11,7 @@ import javax.swing.JOptionPane;
 
 public class UI_VentanaPrincipal extends javax.swing.JFrame {
 
-    private static void EscribirArchivo(String personas) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+    
 
   
 
@@ -322,23 +320,10 @@ private class_listaPersonas lista;
     private void BtnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAgregarActionPerformed
         String nombre, apellidos, cedula;
         
+        EscribirArchivo("personas",txt_nombre.getText()  +" " +txt_apellido.getText() + " con cédula= " + txt_cedula.getText());
         
-        JFileChooser fc = new JFileChooser();
-        fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-        try {
-           
-            FileWriter fw = new FileWriter("personas.txt");
-            BufferedWriter bw = new BufferedWriter(fw);
-            bw.write(txt_nombre.getText()  +" " +txt_apellido.getText() + " con cédula= " + txt_cedula.getText());
-            bw.close(); 
-            String texto = "Tus datos se han guardado" ;
-            JOptionPane.showMessageDialog(this, texto, "Mensaje", JOptionPane.INFORMATION_MESSAGE,null);
-        } 
-        catch (Exception e) {
-            e.printStackTrace();
-        }
         
-        verDatos();
+       // verDatos();
     }//GEN-LAST:event_BtnAgregarActionPerformed
     private void verDatos(){
         
@@ -364,7 +349,7 @@ private class_listaPersonas lista;
 
     public static void main(String args[]) {
         //CrearArchivo("personas");
-        EscribirArchivo("personas");
+       
         
         
         
