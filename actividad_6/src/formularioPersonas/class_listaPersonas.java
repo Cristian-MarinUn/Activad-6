@@ -1,29 +1,39 @@
 package formularioPersonas;
 
-import java.util.*;
+import java.util.ArrayList;
 
 public class class_listaPersonas {
     
-    public static ArrayList<class_persona> personas;
+    private static ArrayList <Persona> lista;
 
      // Atributo que identifica un vector de personas
 
     public class_listaPersonas(){
-        personas = new ArrayList();
-        
+        lista = new ArrayList<Persona>();
     }
     
-    public void añadirPersona(class_persona p) {
-        personas.add(p);
+    public void añadirPersona(Persona p) {
+        lista.add(p);
     }
     
     public void eliminarPersona(int i) {
-        personas.remove(i);
+        lista.remove(i);
 
     }
     
     public void borrarLista() {
-        personas.removeAll(personas);
+        lista.removeAll(lista);
     }
 
+    void add(Persona persona) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    int size() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    Persona get(int i) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

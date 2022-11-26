@@ -1,13 +1,14 @@
 package formularioPersonas;
 
 import java.awt.Color;
-
+import java.io.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 
 public class UI_VentanaPrincipal extends javax.swing.JFrame {
     int xmouse, ymouse;
-    
-     
-       
     public UI_VentanaPrincipal() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -32,22 +33,17 @@ public class UI_VentanaPrincipal extends javax.swing.JFrame {
         txt_nombre = new javax.swing.JTextField();
         txt_apellido = new javax.swing.JTextField();
         txt_cedula = new javax.swing.JTextField();
-        pnl_agregar = new javax.swing.JPanel();
-        lbl_agregar = new javax.swing.JLabel();
-        pnl_eliminar = new javax.swing.JPanel();
-        lbl_eliminar = new javax.swing.JLabel();
-        pnl_modificar = new javax.swing.JPanel();
-        lbl_modificar = new javax.swing.JLabel();
         lbl_nombres = new javax.swing.JLabel();
         lbl_apellidos = new javax.swing.JLabel();
         lbl_cedula = new javax.swing.JLabel();
-        pnl_borrar = new javax.swing.JPanel();
-        lbl_borrar = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jScrollPane4 = new javax.swing.JScrollPane();
         tabla = new javax.swing.JTable();
-        border = new javax.swing.JLabel();
         lbl_img_persona = new javax.swing.JLabel();
+        BtnAgregar = new javax.swing.JButton();
+        BtnLimpiar = new javax.swing.JButton();
+        BtnModificar = new javax.swing.JButton();
+        BtnEliminar = new javax.swing.JButton();
 
         jList1.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -141,9 +137,7 @@ public class UI_VentanaPrincipal extends javax.swing.JFrame {
 
         background.add(pnl_barra, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 30));
 
-        txt_nombre.setBackground(new java.awt.Color(255, 255, 255));
         txt_nombre.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
-        txt_nombre.setForeground(new java.awt.Color(0, 0, 0));
         txt_nombre.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         txt_nombre.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -157,9 +151,7 @@ public class UI_VentanaPrincipal extends javax.swing.JFrame {
         });
         background.add(txt_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 80, 200, 20));
 
-        txt_apellido.setBackground(new java.awt.Color(255, 255, 255));
         txt_apellido.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
-        txt_apellido.setForeground(new java.awt.Color(0, 0, 0));
         txt_apellido.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         txt_apellido.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -168,9 +160,7 @@ public class UI_VentanaPrincipal extends javax.swing.JFrame {
         });
         background.add(txt_apellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 120, 200, 20));
 
-        txt_cedula.setBackground(new java.awt.Color(255, 255, 255));
         txt_cedula.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
-        txt_cedula.setForeground(new java.awt.Color(0, 0, 0));
         txt_cedula.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         txt_cedula.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -179,159 +169,19 @@ public class UI_VentanaPrincipal extends javax.swing.JFrame {
         });
         background.add(txt_cedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 160, 200, 20));
 
-        pnl_agregar.setBackground(new java.awt.Color(142, 57, 70));
-
-        lbl_agregar.setFont(new java.awt.Font("Roboto Black", 0, 14)); // NOI18N
-        lbl_agregar.setForeground(new java.awt.Color(255, 255, 255));
-        lbl_agregar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbl_agregar.setText("Agregar");
-        lbl_agregar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lbl_agregar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lbl_agregarMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                lbl_agregarMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                lbl_agregarMouseExited(evt);
-            }
-        });
-
-        javax.swing.GroupLayout pnl_agregarLayout = new javax.swing.GroupLayout(pnl_agregar);
-        pnl_agregar.setLayout(pnl_agregarLayout);
-        pnl_agregarLayout.setHorizontalGroup(
-            pnl_agregarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lbl_agregar, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
-        );
-        pnl_agregarLayout.setVerticalGroup(
-            pnl_agregarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lbl_agregar, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
-        );
-
-        background.add(pnl_agregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 110, 90, 30));
-
-        pnl_eliminar.setBackground(new java.awt.Color(142, 57, 70));
-
-        lbl_eliminar.setFont(new java.awt.Font("Roboto Black", 0, 14)); // NOI18N
-        lbl_eliminar.setForeground(new java.awt.Color(255, 255, 255));
-        lbl_eliminar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbl_eliminar.setText("Eliminar");
-        lbl_eliminar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lbl_eliminar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lbl_eliminarMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                lbl_eliminarMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                lbl_eliminarMouseExited(evt);
-            }
-        });
-
-        javax.swing.GroupLayout pnl_eliminarLayout = new javax.swing.GroupLayout(pnl_eliminar);
-        pnl_eliminar.setLayout(pnl_eliminarLayout);
-        pnl_eliminarLayout.setHorizontalGroup(
-            pnl_eliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnl_eliminarLayout.createSequentialGroup()
-                .addComponent(lbl_eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-        pnl_eliminarLayout.setVerticalGroup(
-            pnl_eliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_eliminarLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(lbl_eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-
-        background.add(pnl_eliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 300, 90, 30));
-
-        pnl_modificar.setBackground(new java.awt.Color(142, 57, 70));
-
-        lbl_modificar.setFont(new java.awt.Font("Roboto Black", 0, 14)); // NOI18N
-        lbl_modificar.setForeground(new java.awt.Color(255, 255, 255));
-        lbl_modificar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbl_modificar.setText("modificar");
-        lbl_modificar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lbl_modificar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lbl_modificarMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                lbl_modificarMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                lbl_modificarMouseExited(evt);
-            }
-        });
-
-        javax.swing.GroupLayout pnl_modificarLayout = new javax.swing.GroupLayout(pnl_modificar);
-        pnl_modificar.setLayout(pnl_modificarLayout);
-        pnl_modificarLayout.setHorizontalGroup(
-            pnl_modificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_modificarLayout.createSequentialGroup()
-                .addComponent(lbl_modificar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-        pnl_modificarLayout.setVerticalGroup(
-            pnl_modificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_modificarLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(lbl_modificar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-
-        background.add(pnl_modificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 250, 90, 30));
-
         lbl_nombres.setFont(new java.awt.Font("Roboto Light", 1, 12)); // NOI18N
-        lbl_nombres.setForeground(new java.awt.Color(0, 0, 0));
         lbl_nombres.setText("Nombres:");
         background.add(lbl_nombres, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 80, 60, 20));
 
         lbl_apellidos.setFont(new java.awt.Font("Roboto Light", 1, 12)); // NOI18N
-        lbl_apellidos.setForeground(new java.awt.Color(0, 0, 0));
         lbl_apellidos.setText("Apellidos:");
         background.add(lbl_apellidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 120, 70, 20));
 
         lbl_cedula.setFont(new java.awt.Font("Roboto Light", 1, 12)); // NOI18N
-        lbl_cedula.setForeground(new java.awt.Color(0, 0, 0));
         lbl_cedula.setText("Cedula:");
         background.add(lbl_cedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 160, 70, 20));
-
-        pnl_borrar.setBackground(new java.awt.Color(142, 57, 70));
-
-        lbl_borrar.setFont(new java.awt.Font("Roboto Black", 0, 14)); // NOI18N
-        lbl_borrar.setForeground(new java.awt.Color(255, 255, 255));
-        lbl_borrar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbl_borrar.setText("Borrar");
-        lbl_borrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lbl_borrar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lbl_borrarMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                lbl_borrarMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                lbl_borrarMouseExited(evt);
-            }
-        });
-
-        javax.swing.GroupLayout pnl_borrarLayout = new javax.swing.GroupLayout(pnl_borrar);
-        pnl_borrar.setLayout(pnl_borrarLayout);
-        pnl_borrarLayout.setHorizontalGroup(
-            pnl_borrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lbl_borrar, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
-        );
-        pnl_borrarLayout.setVerticalGroup(
-            pnl_borrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lbl_borrar, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
-        );
-
-        background.add(pnl_borrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 150, -1, -1));
         background.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 190, 550, 10));
 
-        tabla.setBackground(new java.awt.Color(255, 255, 255));
         tabla.setForeground(new java.awt.Color(255, 255, 255));
         tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -349,18 +199,53 @@ public class UI_VentanaPrincipal extends javax.swing.JFrame {
                 "Nombre", "Apellido", "Cedula"
             }
         ));
+        tabla.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaMouseClicked(evt);
+            }
+        });
         jScrollPane4.setViewportView(tabla);
 
         background.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 210, 420, 170));
-
-        border.setText("jLabel1");
-        border.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(142, 57, 70), 3));
-        background.add(border, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 390));
 
         lbl_img_persona.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl_img_persona.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/guayacan_rosado.png"))); // NOI18N
         lbl_img_persona.setToolTipText("");
         background.add(lbl_img_persona, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 220, 360));
+
+        BtnAgregar.setBackground(new java.awt.Color(139, 52, 52));
+        BtnAgregar.setForeground(new java.awt.Color(255, 255, 255));
+        BtnAgregar.setText("Agregar");
+        BtnAgregar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        BtnAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnAgregarActionPerformed(evt);
+            }
+        });
+        background.add(BtnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 110, 90, 30));
+
+        BtnLimpiar.setBackground(new java.awt.Color(139, 52, 52));
+        BtnLimpiar.setForeground(new java.awt.Color(255, 255, 255));
+        BtnLimpiar.setText("Limpiar");
+        BtnLimpiar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        BtnLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnLimpiarActionPerformed(evt);
+            }
+        });
+        background.add(BtnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 153, 90, 30));
+
+        BtnModificar.setBackground(new java.awt.Color(139, 52, 52));
+        BtnModificar.setForeground(new java.awt.Color(255, 255, 255));
+        BtnModificar.setText("Modificar");
+        BtnModificar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        background.add(BtnModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 253, 90, 30));
+
+        BtnEliminar.setBackground(new java.awt.Color(139, 52, 52));
+        BtnEliminar.setForeground(new java.awt.Color(255, 255, 255));
+        BtnEliminar.setText("Eliminar");
+        BtnEliminar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        background.add(BtnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 293, 90, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -375,23 +260,10 @@ public class UI_VentanaPrincipal extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+private class_listaPersonas lista;
     private void txt_cedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_cedulaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_cedulaActionPerformed
-
-    private void lbl_agregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_agregarMouseClicked
-        
-        String Nom =txt_nombre.getText();
-        String Apll = txt_apellido.getText();
-        String cedula = txt_cedula.getText();
-        
-        txt_nombre.setText("");
-        txt_apellido.setText("");
-
-        txt_cedula.setText("");
-        
-    }//GEN-LAST:event_lbl_agregarMouseClicked
 
     private void pnl_barraMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_barraMousePressed
         xmouse = evt.getX();
@@ -405,11 +277,6 @@ public class UI_VentanaPrincipal extends javax.swing.JFrame {
         this.setLocation(x - xmouse, y - ymouse);
     }//GEN-LAST:event_pnl_barraMouseDragged
 
-    private void lbl_eliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_eliminarMouseClicked
-        
-        
-    }//GEN-LAST:event_lbl_eliminarMouseClicked
-
     private void txt_apellidoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txt_apellidoMouseClicked
     }//GEN-LAST:event_txt_apellidoMouseClicked
 
@@ -419,37 +286,6 @@ public class UI_VentanaPrincipal extends javax.swing.JFrame {
 
     private void txt_nombreMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txt_nombreMousePressed
     }//GEN-LAST:event_txt_nombreMousePressed
-
-    private void lbl_borrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_borrarMouseClicked
-        txt_nombre.setText("");
-        txt_apellido.setText("");
-        txt_cedula.setText("");
-    }//GEN-LAST:event_lbl_borrarMouseClicked
-
-    private void lbl_agregarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_agregarMouseEntered
-       pnl_agregar.setBackground(new Color(111,45,54));     // cambio de color cuando el cursor entra del recuadro
-        
-    }//GEN-LAST:event_lbl_agregarMouseEntered
-
-    private void lbl_agregarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_agregarMouseExited
-        pnl_agregar.setBackground(new Color(142,57,70));     // cambio de color cuando el cursor sale del recuadro
-    }//GEN-LAST:event_lbl_agregarMouseExited
-
-    private void lbl_borrarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_borrarMouseEntered
-        pnl_borrar.setBackground(new Color(111,45,54)); 
-    }//GEN-LAST:event_lbl_borrarMouseEntered
-
-    private void lbl_borrarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_borrarMouseExited
-        pnl_borrar.setBackground(new Color(142,57,70));     // cambio de color cuando el cursor sale del recuadro
-    }//GEN-LAST:event_lbl_borrarMouseExited
-
-    private void lbl_eliminarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_eliminarMouseEntered
-        pnl_eliminar.setBackground(new Color(111,45,54)); 
-    }//GEN-LAST:event_lbl_eliminarMouseEntered
-
-    private void lbl_eliminarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_eliminarMouseExited
-        pnl_eliminar.setBackground(new Color(142,57,70));     // cambio de color cuando el cursor sale del recuadro
-    }//GEN-LAST:event_lbl_eliminarMouseExited
 
     private void lbl_exitMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_exitMouseExited
         exit.setBackground(new Color(142,57,70));     // cambio de color cuando el cursor sale del recuadro
@@ -464,21 +300,42 @@ public class UI_VentanaPrincipal extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_lbl_exitMouseClicked
 
-    private void lbl_modificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_modificarMouseClicked
+    private void BtnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAgregarActionPerformed
+        String nombre, apellidos, cedula;
+        JFileChooser fc = new JFileChooser();
+        fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        try {
+            FileWriter fw = new FileWriter("C:\\Users\\Laura\\Documents\\personas.txt");
+            BufferedWriter bw = new BufferedWriter(fw);
+            bw.write(txt_nombre.getText()  + txt_apellido.getText() + "Con cédula= " + txt_cedula.getText());
+            bw.close(); 
+            String texto = "Tus datos se han guardado" ;
+            JOptionPane.showMessageDialog(this, texto, "Mensaje", JOptionPane.INFORMATION_MESSAGE,null);
+            } catch (Exception e) {
+            e.printStackTrace();
+            }
+        verDatos();
+    }//GEN-LAST:event_BtnAgregarActionPerformed
+    private void verDatos(){
+        Persona aux;
+        for (int i = 0; i < lista.size(); i++){
+            Object Mat[][] = new Object[i][3];
+            aux = lista.get(i);
+            Mat[i][0] = txt_nombre.getText();
+            Mat[i][1] = txt_apellido.getText();
+            Mat[i][2] = txt_cedula.getText();          
+        };
+        }
+    private void tablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_lbl_modificarMouseClicked
+    }//GEN-LAST:event_tablaMouseClicked
 
-    private void lbl_modificarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_modificarMouseEntered
-        pnl_modificar.setBackground(new Color(111,45,54));
-    }//GEN-LAST:event_lbl_modificarMouseEntered
+    private void BtnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnLimpiarActionPerformed
+        txt_nombre.setText("");
+        txt_apellido.setText("");
+        txt_cedula.setText("");
+    }//GEN-LAST:event_BtnLimpiarActionPerformed
 
-    private void lbl_modificarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_modificarMouseExited
-        pnl_modificar.setBackground(new Color(142,57,70));     // cambio de color cuando el cursor entra del recuadro
-    }//GEN-LAST:event_lbl_modificarMouseExited
-
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -513,8 +370,11 @@ public class UI_VentanaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BtnAgregar;
+    private javax.swing.JButton BtnEliminar;
+    private javax.swing.JButton BtnLimpiar;
+    private javax.swing.JButton BtnModificar;
     private javax.swing.JPanel background;
-    private javax.swing.JLabel border;
     private javax.swing.JPanel exit;
     private javax.swing.JList<String> jList1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -522,21 +382,13 @@ public class UI_VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JLabel lbl_agregar;
     private javax.swing.JLabel lbl_apellidos;
-    private javax.swing.JLabel lbl_borrar;
     private javax.swing.JLabel lbl_cedula;
-    private javax.swing.JLabel lbl_eliminar;
     private javax.swing.JLabel lbl_exit;
     private javax.swing.JLabel lbl_img_persona;
-    private javax.swing.JLabel lbl_modificar;
     private javax.swing.JLabel lbl_nombres;
     private javax.swing.JLabel lbl_titlte;
-    private javax.swing.JPanel pnl_agregar;
     private javax.swing.JPanel pnl_barra;
-    private javax.swing.JPanel pnl_borrar;
-    private javax.swing.JPanel pnl_eliminar;
-    private javax.swing.JPanel pnl_modificar;
     private javax.swing.JTable tabla;
     private javax.swing.JTextField txt_apellido;
     private javax.swing.JTextField txt_cedula;
