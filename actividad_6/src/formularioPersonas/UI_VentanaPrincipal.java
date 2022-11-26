@@ -8,16 +8,13 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 public class UI_VentanaPrincipal extends javax.swing.JFrame {
 
-    
-
-  
-
     int xmouse, ymouse;
-
-    
+    DefaultTableModel modelo;
+    int filas;
     
     
     
@@ -29,7 +26,11 @@ public class UI_VentanaPrincipal extends javax.swing.JFrame {
     public UI_VentanaPrincipal() {
         initComponents();
         this.setLocationRelativeTo(null);
-        //System.out.println(Uss);
+        modelo = new DefaultTableModel();
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Apellido");
+        modelo.addColumn("Cédula");
+        this.tabla.setModel(modelo);
     
     }
     
@@ -199,7 +200,7 @@ public class UI_VentanaPrincipal extends javax.swing.JFrame {
         background.add(lbl_cedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 160, 70, 20));
         background.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 190, 550, 10));
 
-        tabla.setForeground(new java.awt.Color(255, 255, 255));
+        tabla.setForeground(new java.awt.Color(0, 0, 0));
         tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
@@ -256,12 +257,22 @@ public class UI_VentanaPrincipal extends javax.swing.JFrame {
         BtnModificar.setForeground(new java.awt.Color(255, 255, 255));
         BtnModificar.setText("Modificar");
         BtnModificar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        BtnModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnModificarActionPerformed(evt);
+            }
+        });
         background.add(BtnModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 253, 90, 30));
 
         BtnEliminar.setBackground(new java.awt.Color(139, 52, 52));
         BtnEliminar.setForeground(new java.awt.Color(255, 255, 255));
         BtnEliminar.setText("Eliminar");
         BtnEliminar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        BtnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnEliminarActionPerformed(evt);
+            }
+        });
         background.add(BtnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 293, 90, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -310,7 +321,7 @@ private class_listaPersonas lista;
 
     private void lbl_exitMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_exitMouseEntered
         exit.setBackground(new Color(111,45,54));
-        //lbl_exit.setForeground(Color.white);
+       
     }//GEN-LAST:event_lbl_exitMouseEntered
 
     private void lbl_exitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_exitMouseClicked
@@ -318,11 +329,22 @@ private class_listaPersonas lista;
     }//GEN-LAST:event_lbl_exitMouseClicked
 
     private void BtnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAgregarActionPerformed
-        String nombre, apellidos, cedula;
+        //String nombre, apellidos, cedula;
         
+        //Creacion,confirmacion y Escritura del archivo .txt
         EscribirArchivo("personas",txt_nombre.getText()  +" " +txt_apellido.getText() + " con cédula= " + txt_cedula.getText());
         
+        //ingreso de datos en el jTable
+        String []info = new String[3];
+        info[0]=txt_nombre.getText();
+        info[1]=txt_apellido.getText();
+        info[2]=txt_cedula.getText();
+        modelo.addRow(info);
         
+        //limpiar campos de texto al agregar datos
+        txt_nombre.setText("");
+        txt_apellido.setText("");
+        txt_cedula.setText("");
        // verDatos();
     }//GEN-LAST:event_BtnAgregarActionPerformed
     private void verDatos(){
@@ -338,7 +360,14 @@ private class_listaPersonas lista;
         
     }
     private void tablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMouseClicked
-        // TODO add your handling code here:
+
+        int seleccion = tabla.getSelectedRow();
+        
+        txt_nombre.setText(tabla.getValueAt(seleccion, 0).toString());
+        txt_apellido.setText(tabla.getValueAt(seleccion, 1).toString());
+        txt_cedula.setText(tabla.getValueAt(seleccion, 2).toString());
+        filas = seleccion;
+        
     }//GEN-LAST:event_tablaMouseClicked
 
     private void BtnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnLimpiarActionPerformed
@@ -346,6 +375,38 @@ private class_listaPersonas lista;
         txt_apellido.setText("");
         txt_cedula.setText("");
     }//GEN-LAST:event_BtnLimpiarActionPerformed
+
+    private void BtnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEliminarActionPerformed
+       int fila = tabla.getSelectedRow();
+       if(fila>=0){
+           modelo.removeRow(fila);
+           
+       }else{
+           JOptionPane.showMessageDialog(null, "seleccione una fila");
+        }
+        //limpiar campos de texto al eliminar datos
+        txt_nombre.setText("");
+        txt_apellido.setText("");
+        txt_cedula.setText("");
+    }//GEN-LAST:event_BtnEliminarActionPerformed
+
+    private void BtnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnModificarActionPerformed
+        //modificar datos
+        String []info = new String[3];
+        info[0]=txt_nombre.getText();
+        info[1]=txt_apellido.getText();
+        info[2]=txt_cedula.getText();
+        
+        
+        for (int i = 0; i < tabla.getColumnCount();i++){
+            
+            modelo.setValueAt(info[i], filas, i);
+        }
+        
+        
+        
+        
+    }//GEN-LAST:event_BtnModificarActionPerformed
 
     public static void main(String args[]) {
         //CrearArchivo("personas");
