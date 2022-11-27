@@ -1,6 +1,8 @@
 package formularioPersonas;
 
 import java.io.*;
+import java.util.StringTokenizer;
+import java.util.Vector;
 
 public class manejoArchivo {
     
@@ -28,12 +30,51 @@ public class manejoArchivo {
            salida.println(contenido);
            salida.close();
            System.out.println("se escribio en el archivo");
+           //System.out.println(contenido);
+           
+           
        }catch(FileNotFoundException ex){
            ex.printStackTrace(System.out);
        }catch(IOException ex){
            ex.printStackTrace(System.out);
        }
-       
+    }
+    
+    public static void LeerArchivo(String nombreArchivo){
         
+        try{
+            FileReader r = new FileReader(nombreArchivo);
+            
+            BufferedReader buffer = new BufferedReader(r);
+            
+            String temp = "";
+            int cont =0;
+            while(temp != null){
+                temp = buffer.readLine();
+                
+                String x= temp;
+                String z = x;
+                
+                String []arreglo = x.split(" ");
+                   
+                for(int i = 0;i < arreglo.length;i++ ){
+                    System.out.println(arreglo[i]+"  arry: "+ i);
+                    
+                    cont +=1;
+                    
+                }
+                    if(temp == null){
+                        break;
+                    }
+                }
+            }
+            
+        catch(Exception ex){
+            ex.printStackTrace(System.out);
         }
+    }
+    
+     
+       
 }
+

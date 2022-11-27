@@ -2,8 +2,11 @@ package formularioPersonas;
 
 import static formularioPersonas.manejoArchivo.CrearArchivo;
 import static formularioPersonas.manejoArchivo.EscribirArchivo;
+import static formularioPersonas.manejoArchivo.LeerArchivo;
 import java.awt.Color;
 import java.io.*;
+import java.util.ArrayList;
+import static java.util.Collections.list;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
@@ -15,8 +18,8 @@ public class UI_VentanaPrincipal extends javax.swing.JFrame {
     int xmouse, ymouse;
     DefaultTableModel modelo;
     int filas;
-    
-    
+   // private final ArrayList<formulario> lista = new ArrayList<>();
+    //private int cont=0;
     
     
     
@@ -31,7 +34,49 @@ public class UI_VentanaPrincipal extends javax.swing.JFrame {
         modelo.addColumn("Apellido");
         modelo.addColumn("Cédula");
         this.tabla.setModel(modelo);
-    
+        //LeerArchivo("personas");
+        
+        
+        
+        //cargar el archivo .txt a la jtable
+        
+        try{
+            FileReader r = new FileReader("personas.txt");
+            
+            BufferedReader buffer = new BufferedReader(r);
+            
+            String temp = "";
+            
+            while(temp != null){
+                temp = buffer.readLine();
+                
+                String x= temp;
+                
+                String []arreglo = x.split(" ");
+                
+                 String []info = new String[4]; 
+                    info[0]=arreglo[0];
+                    info[1]=arreglo[1];
+                    info[2]=arreglo[4];
+                    modelo.addRow(info);
+                for(int i = 0;i < arreglo.length;i++ ){
+                   // System.out.println(arreglo[i]+" "+ i);
+                }
+                 
+                    if(temp == null){
+                        break;
+                    }
+                }
+            }
+            
+        catch(Exception ex){
+            ex.printStackTrace(System.out);
+        }
+        
+        
+        
+        
+        
     }
     
     
@@ -62,6 +107,9 @@ public class UI_VentanaPrincipal extends javax.swing.JFrame {
         BtnLimpiar = new javax.swing.JButton();
         BtnModificar = new javax.swing.JButton();
         BtnEliminar = new javax.swing.JButton();
+        txt_nombre1 = new javax.swing.JTextField();
+        lbl_nombres1 = new javax.swing.JLabel();
+        BtnBuscar = new javax.swing.JButton();
 
         jList1.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -167,7 +215,7 @@ public class UI_VentanaPrincipal extends javax.swing.JFrame {
                 txt_nombreActionPerformed(evt);
             }
         });
-        background.add(txt_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 80, 200, 20));
+        background.add(txt_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 80, 150, 20));
 
         txt_apellido.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
         txt_apellido.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -176,7 +224,7 @@ public class UI_VentanaPrincipal extends javax.swing.JFrame {
                 txt_apellidoMouseClicked(evt);
             }
         });
-        background.add(txt_apellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 120, 200, 20));
+        background.add(txt_apellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 120, 150, 20));
 
         txt_cedula.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
         txt_cedula.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -185,18 +233,21 @@ public class UI_VentanaPrincipal extends javax.swing.JFrame {
                 txt_cedulaActionPerformed(evt);
             }
         });
-        background.add(txt_cedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 160, 200, 20));
+        background.add(txt_cedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 160, 150, 20));
 
         lbl_nombres.setFont(new java.awt.Font("Roboto Light", 1, 12)); // NOI18N
+        lbl_nombres.setForeground(new java.awt.Color(0, 0, 0));
         lbl_nombres.setText("Nombres:");
         background.add(lbl_nombres, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 80, 60, 20));
 
         lbl_apellidos.setFont(new java.awt.Font("Roboto Light", 1, 12)); // NOI18N
+        lbl_apellidos.setForeground(new java.awt.Color(0, 0, 0));
         lbl_apellidos.setText("Apellidos:");
         background.add(lbl_apellidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 120, 70, 20));
 
         lbl_cedula.setFont(new java.awt.Font("Roboto Light", 1, 12)); // NOI18N
-        lbl_cedula.setText("Cedula:");
+        lbl_cedula.setForeground(new java.awt.Color(0, 0, 0));
+        lbl_cedula.setText("Cédula:");
         background.add(lbl_cedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 160, 70, 20));
         background.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 190, 550, 10));
 
@@ -214,7 +265,7 @@ public class UI_VentanaPrincipal extends javax.swing.JFrame {
                 {null, null, null}
             },
             new String [] {
-                "Nombre", "Apellido", "Cedula"
+                "Nombre", "Apellido", "Cédula"
             }
         ));
         tabla.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -249,7 +300,7 @@ public class UI_VentanaPrincipal extends javax.swing.JFrame {
                 BtnAgregarActionPerformed(evt);
             }
         });
-        background.add(BtnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 110, 90, 30));
+        background.add(BtnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 110, 90, 30));
 
         BtnLimpiar.setBackground(new java.awt.Color(139, 52, 52));
         BtnLimpiar.setForeground(new java.awt.Color(255, 255, 255));
@@ -269,7 +320,7 @@ public class UI_VentanaPrincipal extends javax.swing.JFrame {
                 BtnLimpiarActionPerformed(evt);
             }
         });
-        background.add(BtnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 153, 90, 30));
+        background.add(BtnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 150, 90, 30));
 
         BtnModificar.setBackground(new java.awt.Color(139, 52, 52));
         BtnModificar.setForeground(new java.awt.Color(255, 255, 255));
@@ -311,6 +362,45 @@ public class UI_VentanaPrincipal extends javax.swing.JFrame {
         });
         background.add(BtnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 293, 90, 30));
 
+        txt_nombre1.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
+        txt_nombre1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        txt_nombre1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                txt_nombre1MousePressed(evt);
+            }
+        });
+        txt_nombre1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_nombre1ActionPerformed(evt);
+            }
+        });
+        background.add(txt_nombre1, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 60, 100, 20));
+
+        lbl_nombres1.setFont(new java.awt.Font("Roboto Light", 1, 12)); // NOI18N
+        lbl_nombres1.setForeground(new java.awt.Color(0, 0, 0));
+        lbl_nombres1.setText("cédula");
+        background.add(lbl_nombres1, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 60, 40, 20));
+
+        BtnBuscar.setBackground(new java.awt.Color(139, 52, 52));
+        BtnBuscar.setForeground(new java.awt.Color(255, 255, 255));
+        BtnBuscar.setText("Buscar");
+        BtnBuscar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        BtnBuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        BtnBuscar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                BtnBuscarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                BtnBuscarMouseExited(evt);
+            }
+        });
+        BtnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnBuscarActionPerformed(evt);
+            }
+        });
+        background.add(BtnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 90, 90, 30));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -324,7 +414,7 @@ public class UI_VentanaPrincipal extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-private class_listaPersonas lista;
+
     private void txt_cedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_cedulaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_cedulaActionPerformed
@@ -368,7 +458,7 @@ private class_listaPersonas lista;
         //String nombre, apellidos, cedula;
         
         //Creacion,confirmacion y Escritura del archivo .txt
-        EscribirArchivo("personas",txt_nombre.getText()  +" " +txt_apellido.getText() + " con cédula= " + txt_cedula.getText());
+        EscribirArchivo("personas.txt",txt_nombre.getText()  +" " +txt_apellido.getText() + " con cédula= " + txt_cedula.getText()+" #");
         
         //ingreso de datos en el jTable
         String []info = new String[3];
@@ -381,20 +471,10 @@ private class_listaPersonas lista;
         txt_nombre.setText("");
         txt_apellido.setText("");
         txt_cedula.setText("");
-       // verDatos();
+        //verDatos();
+        
     }//GEN-LAST:event_BtnAgregarActionPerformed
-    private void verDatos(){
-        
-        Persona aux;
-        for (int i = 0; i < lista.size(); i++){
-            Object Mat[][] = new Object[i][3];
-            aux = lista.get(i);
-            Mat[i][0] = txt_nombre.getText();
-            Mat[i][1] = txt_apellido.getText();
-            Mat[i][2] = txt_cedula.getText();          
-        }
-        
-    }
+   
     private void tablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMouseClicked
 
         int seleccion = tabla.getSelectedRow();
@@ -403,6 +483,54 @@ private class_listaPersonas lista;
         txt_apellido.setText(tabla.getValueAt(seleccion, 1).toString());
         txt_cedula.setText(tabla.getValueAt(seleccion, 2).toString());
         filas = seleccion;
+        
+        System.out.println(seleccion);
+        
+        try{
+            FileReader r = new FileReader("personas.txt");
+            
+            BufferedReader buffer = new BufferedReader(r);
+            
+            String temp = "";
+            int cont = 0;
+            while(temp != null){
+                temp = buffer.readLine();
+                
+                String x= temp;
+                
+                
+                    String []arreglo = x.split("\n ");
+                
+                
+                
+                    
+                for(int i = 0;i < arreglo.length;i++ ){
+                   
+                    if(cont == seleccion){
+                       System.out.println(arreglo[i]+"  arry: "+ cont); 
+                       
+                       
+                       
+                       
+                       
+                    }
+                    
+                    cont +=1;
+                   
+                
+                   
+                }
+                 
+                    if(temp == null){
+                        break;
+                    }
+                }
+            }
+            
+        catch(Exception ex){
+            ex.printStackTrace(System.out);
+        }
+        
         
     }//GEN-LAST:event_tablaMouseClicked
 
@@ -428,15 +556,24 @@ private class_listaPersonas lista;
 
     private void BtnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnModificarActionPerformed
         //modificar datos
-        String []info = new String[3];
-        info[0]=txt_nombre.getText();
-        info[1]=txt_apellido.getText();
-        info[2]=txt_cedula.getText();
+        
+        
+        
+        int fila = tabla.getSelectedRow();
+        if(fila>=0){
+            String []info = new String[3];
+            info[0]=txt_nombre.getText();
+            info[1]=txt_apellido.getText();
+            info[2]=txt_cedula.getText();
         
         
         for (int i = 0; i < tabla.getColumnCount();i++){
             
             modelo.setValueAt(info[i], filas, i);
+            
+        }
+       }else{
+           JOptionPane.showMessageDialog(null, "seleccione una fila");
         }
         
         
@@ -476,25 +613,35 @@ private class_listaPersonas lista;
         BtnEliminar.setBackground(new Color(142, 57, 70));
     }//GEN-LAST:event_BtnEliminarMouseExited
 
+    private void txt_nombre1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txt_nombre1MousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_nombre1MousePressed
+
+    private void txt_nombre1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_nombre1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_nombre1ActionPerformed
+
+    private void BtnBuscarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnBuscarMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BtnBuscarMouseEntered
+
+    private void BtnBuscarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnBuscarMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BtnBuscarMouseExited
+
+    private void BtnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBuscarActionPerformed
+        if(!txt_cedula.getText().isEmpty()){
+            String aux = null;
+            
+            
+        }
+        
+    }//GEN-LAST:event_BtnBuscarActionPerformed
+
     public static void main(String args[]) {
-        //CrearArchivo("personas");
+        
        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+    
         
        // EscribirArchivo("personas");
         try {
@@ -526,6 +673,7 @@ private class_listaPersonas lista;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnAgregar;
+    private javax.swing.JButton BtnBuscar;
     private javax.swing.JButton BtnEliminar;
     private javax.swing.JButton BtnLimpiar;
     private javax.swing.JButton BtnModificar;
@@ -542,11 +690,13 @@ private class_listaPersonas lista;
     private javax.swing.JLabel lbl_exit;
     private javax.swing.JLabel lbl_img_persona;
     private javax.swing.JLabel lbl_nombres;
+    private javax.swing.JLabel lbl_nombres1;
     private javax.swing.JLabel lbl_titlte;
     private javax.swing.JPanel pnl_barra;
     private javax.swing.JTable tabla;
     private javax.swing.JTextField txt_apellido;
     private javax.swing.JTextField txt_cedula;
     private javax.swing.JTextField txt_nombre;
+    private javax.swing.JTextField txt_nombre1;
     // End of variables declaration//GEN-END:variables
 }
